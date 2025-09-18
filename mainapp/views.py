@@ -4,5 +4,5 @@ from django.views.generic import TemplateView
 
 
 # Create your views here.
-class MailingHomeView(LoginRequiredMixin, TemplateView):
+class MailingHomeView(TemplateView):
     template_name = 'mainapp/index.html'

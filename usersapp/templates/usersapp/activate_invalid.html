@@ -1,0 +1,8 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Активация не удалась{% endblock %}
+
+{% block content %}
+<h2>Ошибка активации</h2>
+<p>Ссылка недействительна или срок её действия истёк.</p>
+<a href="{% url 'usersapp:register' %}" class="btn btn-primary">Зарегистрироваться заново</a>
+{% endblock %}

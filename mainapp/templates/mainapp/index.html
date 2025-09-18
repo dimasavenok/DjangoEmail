@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    asdsafdsafs
-</body>
-</html>
+{% extends 'mainapp/base.html' %}
+{% block title %}Главная — MailingApp{% endblock %}
+
+{% block content %}
+<h1>Панель управления</h1>
+
+{% if user.is_authenticated %}
+<div class="row g-3">
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5 class="card-title">Всего рассылок</h5>
+      <p class="display-6">{{ total_mailings }}</p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5 class="card-title">Активные</h5>
+      <p class="display-6">{{ active_mailings }}</p>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card p-3">
+      <h5 class="card-title">Уникальные получатели</h5>
+      <p class="display-6">{{ unique_recipients }}</p>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<h3 class="mt-4">Статистика отправок</h3>
+<ul>
+  <li>Успешных попыток: {{ success_count }}</li>
+  <li>Неуспешных попыток: {{ failed_count }}</li>
+</ul>
+ {% else %}
+<p>Сначало авторизируйтесь</p>
+{% endif %}
+
+{% endblock %}
