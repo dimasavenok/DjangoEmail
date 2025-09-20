@@ -10,11 +10,11 @@
   <div class="container">
     <a class="navbar-brand" href="{% url 'mainapp:home' %}">MailingApp</a>
     <div class="collapse navbar-collapse">
-      <ul class="navbar-nav me-auto">
+<ul class="navbar-nav me-auto">
         {% if user.is_authenticated %}
-          <li class="nav-item"><a class="nav-link" href="{% url 'mailings:recipients_list' %}">Получатели</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'mailings:messages_list' %}">Сообщения</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'mailings:mailings_list' %}">Рассылки</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:recipients_list' %}">Получатели</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:home' %}">Сообщения</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:home' %}">Рассылки</a></li>
         {% endif %}
       </ul>
       <ul class="navbar-nav">
