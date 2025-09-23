@@ -1,0 +1,33 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Сообщения{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2>Сообщения</h2>
+  <a href="{% url 'mainapp:message_create' %}" class="btn btn-primary">Создать сообщение</a>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Тема</th>
+      <th>Текст (фрагмент)</th>
+      <th>Действия</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for m in object_list %}
+    <tr>
+      <td>{{ m.subject }}</td>
+      <td>{{ m.body|truncatechars:80 }}</td>
+      <td>
+        <a class="btn btn-sm btn-secondary" href="{% url 'mainapp:message_update' m.pk %}">Изменить</a>
+        <!-- если нужен просмотр — можно добавить detail -->
+      </td>
+    </tr>
+    {% empty %}
+      <tr><td colspan="3">Нет сообщений</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

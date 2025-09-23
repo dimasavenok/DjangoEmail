@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Рассылка {{ object.pk }}{% endblock %}
+
+{% block content %}
+<h2>Рассылка #{{ object.pk }}</h2>
+
+<p><strong>Сообщение:</strong> {{ object.message.subject }}</p>
+<p><strong>Статус:</strong> {{ object.get_status_display }}</p>
+<p><strong>Начало:</strong> {{ object.start_at }}</p>
+<p><strong>Окончание:</strong> {{ object.end_at }}</p>
+<p><strong>Создано:</strong> {{ object.created_at }}</p>
+
+<h4>Получатели</h4>
+<ul>
+  {% for r in object.recipients.all %}
+    <li>{{ r.full_name }} — {{ r.email }}</li>
+  {% empty %}
+    <li>Нет получателей</li>
+  {% endfor %}
+</ul>
+
+<h4 class="mt-3">Попытки</h4>
+<table class="table">
+  <thead><tr><th>Дата</th><th>Получатель</th><th>Статус</th><th>Ответ сервера</th></tr></thead>
+  <tbody>
+    {% for a in object.attempts.all %}
+      <tr>
+        <td>{{ a.created_at }}</td>
+        <td>{{ a.recipient }}</td>
+        <td>{{ a.get_status_display }}</td>
+        <td>{{ a.server_response|default:"—" }}</td>
+      </tr>
+    {% empty %}
+      <tr><td colspan="4">Нет попыток</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<form method="post" action="{% url 'mainapp:mailing_send' object.pk %}">
+  {% csrf_token %}
+  <button class="btn btn-success" type="submit">Отправить сейчас</button>
+  <a href="{% url 'mainapp:mailings_list' %}" class="btn btn-secondary">Назад</a>
+</form>
+{% endblock %}

@@ -53,5 +53,5 @@ class MailingAttempt(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_FAILED)
     response_server = models.TextField(null=True, blank=True)
     mailing = models.ForeignKey(Mailing, on_delete=models.CASCADE)
-
+    recipient = models.ForeignKey(Recipient, on_delete=models.CASCADE)
 

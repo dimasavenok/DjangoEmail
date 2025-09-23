@@ -13,14 +13,19 @@
 <ul class="navbar-nav me-auto">
         {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:recipients_list' %}">Получатели</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:home' %}">Сообщения</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:home' %}">Рассылки</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:messages_list' %}">Сообщения</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'mainapp:mailings_list' %}">Рассылки</a></li>
         {% endif %}
       </ul>
       <ul class="navbar-nav">
         {% if user.is_authenticated %}
           <li class="nav-item"><a class="nav-link" href="{% url 'usersapp:profile' %}">Профиль</a></li>
-          <li class="nav-item"><a class="nav-link" href="{% url 'usersapp:logout' %}">Выход</a></li>
+          <li class="nav-item">
+            <form action="{% url 'usersapp:logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Выйти</button>
+            </form>
+          </li>
         {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'usersapp:login' %}">Вход</a></li>
           <li class="nav-item"><a class="nav-link" href="{% url 'usersapp:register' %}">Регистрация</a></li>
