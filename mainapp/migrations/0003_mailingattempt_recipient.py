@@ -7,14 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mainapp', '0002_rename_user_recipient_owner'),
+        ("mainapp", "0002_rename_user_recipient_owner"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='mailingattempt',
-            name='recipient',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='mainapp.recipient'),
+            model_name="mailingattempt",
+            name="recipient",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="mainapp.recipient",
+            ),
             preserve_default=False,
         ),
     ]

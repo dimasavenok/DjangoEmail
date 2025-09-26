@@ -14,9 +14,9 @@ from usersapp.models import User
 
 # Create your views here.
 class RegisterView(CreateView):
-    template_name = 'usersapp/register.html'
+    template_name = "usersapp/register.html"
     form_class = UserRegisterForm
-    success_url = reverse_lazy('mainapp:home')
+    success_url = reverse_lazy("mainapp:home")
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -26,7 +26,7 @@ class RegisterView(CreateView):
         token = default_token_generator.make_token(user)
 
         activation_link = self.request.build_absolute_uri(
-            reverse_lazy('usersapp:activate', kwargs={'uidb64': uid, 'token': token})
+            reverse_lazy("usersapp:activate", kwargs={"uidb64": uid, "token": token})
         )
         print(activation_link)
 
@@ -44,14 +44,15 @@ class ActivateView(View):
             user.is_active = True
             user.save()
             login(request, user)
-            return redirect('mainapp:home')
+            return redirect("mainapp:home")
         return render(request, "usersapp/activate_invalid.html")
 
+
 class ProfileView(LoginRequiredMixin, UpdateView):
-    model =  User
+    model = User
     form_class = CustomUserChangeForm
-    template_name = 'usersapp/profile.html'
-    success_url = reverse_lazy('mainapp:home')
+    template_name = "usersapp/profile.html"
+    success_url = reverse_lazy("mainapp:home")
 
     def get_object(self, queryset=None):
         return self.request.user

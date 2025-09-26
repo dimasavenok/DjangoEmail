@@ -16,52 +16,131 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Mailing',
+            name="Mailing",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('start_at', models.DateTimeField()),
-                ('end_at', models.DateTimeField()),
-                ('status', models.CharField(choices=[('created', 'Создана'), ('running', 'Запущена'), ('finished', 'Завершена')], default='created', max_length=20)),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("start_at", models.DateTimeField()),
+                ("end_at", models.DateTimeField()),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[
+                            ("created", "Создана"),
+                            ("running", "Запущена"),
+                            ("finished", "Завершена"),
+                        ],
+                        default="created",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='MailingAttempt',
+            name="MailingAttempt",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('attempted_at', models.DateTimeField(default=django.utils.timezone.now)),
-                ('status', models.CharField(choices=[('success', 'Успешно'), ('failed', 'Не успешно')], default='failed', max_length=20)),
-                ('response_server', models.TextField(blank=True, null=True)),
-                ('mailing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.mailing')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "attempted_at",
+                    models.DateTimeField(default=django.utils.timezone.now),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        choices=[("success", "Успешно"), ("failed", "Не успешно")],
+                        default="failed",
+                        max_length=20,
+                    ),
+                ),
+                ("response_server", models.TextField(blank=True, null=True)),
+                (
+                    "mailing",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="mainapp.mailing",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Message',
+            name="Message",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('subject', models.CharField(max_length=255)),
-                ('body', models.TextField()),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("subject", models.CharField(max_length=255)),
+                ("body", models.TextField()),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='mailing',
-            name='message',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='mainapp.message'),
+            model_name="mailing",
+            name="message",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="mainapp.message"
+            ),
         ),
         migrations.CreateModel(
-            name='Recipient',
+            name="Recipient",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('full_name', models.CharField(max_length=255)),
-                ('comment', models.TextField(blank=True, null=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                ("full_name", models.CharField(max_length=255)),
+                ("comment", models.TextField(blank=True, null=True)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='mailing',
-            name='recipients',
-            field=models.ManyToManyField(to='mainapp.recipient'),
+            model_name="mailing",
+            name="recipients",
+            field=models.ManyToManyField(to="mainapp.recipient"),
         ),
     ]

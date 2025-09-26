@@ -32,6 +32,7 @@
           {% csrf_token %}
           <button class="btn btn-sm btn-success" type="submit">Отправить</button>
         </form>
+        <a class="btn btn-sm btn-danger" href="{% url 'mainapp:mailing_delete' mail.pk %}">Удалить</a>
       </td>
     </tr>
     {% empty %}

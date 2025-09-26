@@ -22,7 +22,7 @@
       <td>{{ m.body|truncatechars:80 }}</td>
       <td>
         <a class="btn btn-sm btn-secondary" href="{% url 'mainapp:message_update' m.pk %}">Изменить</a>
-        <!-- если нужен просмотр — можно добавить detail -->
+        <a class="btn btn-sm btn-danger" href="{% url 'mainapp:message_delete' m.pk %}">Удалить</a>
       </td>
     </tr>
     {% empty %}
