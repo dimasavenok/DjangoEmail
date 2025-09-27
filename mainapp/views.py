@@ -171,16 +171,10 @@ class MailingDetailView(LoginRequiredMixin, DetailView):
     template_name = "mainapp/mailing_detail.html"
 
 
-class MailingDeleteView(LoginRequiredMixin, DeleteView):
+class MailingDeleteView(LoginRequiredMixin, OwnerOrManagerMixin,  DeleteView):
     model = Mailing
     template_name = "mainapp/confirm_delete.html"
     success_url = reverse_lazy("mainapp:mailings_list")
-
-    def get_queryset(self):
-        qs = super().get_queryset()
-        if not self.request.user.groups.filter(name="Managers").exists():
-            qs = qs.filter(owner=self.request.user)
-        return qs
 
 
 # send
