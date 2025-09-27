@@ -1,0 +1,8 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Регистрация — шаг завершён{% endblock %}
+
+{% block content %}
+<h2>Спасибо за регистрацию</h2>
+<p>Проверьте почту и подтвердите адрес, чтобы активировать аккаунт.</p>
+<a href="{% url 'mainapp:home' %}" class="btn btn-primary">На главную</a>
+{% endblock %}

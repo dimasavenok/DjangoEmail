@@ -1,0 +1,11 @@
+[flake8]
+max-line-length = 88
+exclude =
+    .git,
+    __pycache__,
+    migrations,
+    env,
+    venv
+extend-ignore =
+    E203,  ; конфликтует с black
+    W503   ; устаревшее правило

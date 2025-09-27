@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% block title %}Форма получателя{% endblock %}
+
+{% block content %}
+<h2>{% if object %}Изменить{% else %}Создать{% endif %} получателя</h2>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    {{ form.email }}
+    {{ form.email.errors }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Ф.И.О.</label>
+    {{ form.full_name }}
+    {{ form.full_name.errors }}
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Комментарий</label>
+    {{ form.comment }}
+    {{ form.comment.errors }}
+  </div>
+
+  <button type="submit" class="btn btn-success">Сохранить</button>
+  <a href="{% url 'mainapp:recipients_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
